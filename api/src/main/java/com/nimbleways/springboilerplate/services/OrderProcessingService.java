@@ -1,0 +1,41 @@
+package com.nimbleways.springboilerplate.services;
+
+import com.nimbleways.springboilerplate.dto.product.ProcessOrderResponse;
+import com.nimbleways.springboilerplate.entities.Order;
+import com.nimbleways.springboilerplate.entities.Product;
+import com.nimbleways.springboilerplate.repositories.OrderRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class OrderProcessingService {
+
+    private final OrderRepository orderRepository;
+    private final List<ProductProcessor> productProcessors;
+
+    public OrderProcessingService(
+            OrderRepository orderRepository,
+            List<ProductProcessor> productProcessors
+    ) {
+        this.orderRepository = orderRepository;
+        this.productProcessors = productProcessors;
+    }
+
+    public ProcessOrderResponse processOrder(Long orderId) {
+        Order order = orderRepository.findById(orderId).get();
+
+        for (Product product : order.getItems()) {
+            findProcessor(product).process(product);
+        }
+
+        return new ProcessOrderResponse(order.getId());
+    }
+
+    private ProductProcessor findProcessor(Product product) {
+        return productProcessors.stream()
+                .filter(processor -> processor.supports(product))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Unsupported product type: " + product.getType()));
+    }
+}
