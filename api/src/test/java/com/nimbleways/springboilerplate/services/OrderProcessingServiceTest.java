@@ -129,7 +129,7 @@ class OrderProcessingServiceTest {
 
         // WHEN / THEN
         assertThrows(
-                java.util.NoSuchElementException.class,
+                IllegalArgumentException.class,
                 () -> orderProcessingService.processOrder(99L)
         );
 

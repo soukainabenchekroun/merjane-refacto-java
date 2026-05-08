@@ -5,6 +5,7 @@ import com.nimbleways.springboilerplate.entities.Order;
 import com.nimbleways.springboilerplate.entities.Product;
 import com.nimbleways.springboilerplate.repositories.OrderRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -26,8 +27,10 @@ public class OrderProcessingService {
         this.productProcessors = productProcessors;
     }
 
+    @Transactional
     public ProcessOrderResponse processOrder(Long orderId) {
-        Order order = orderRepository.findById(orderId).get();
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new IllegalArgumentException("Order not found: " + orderId));
 
         for (Product product : order.getItems()) {
             findProcessor(product).process(product);
