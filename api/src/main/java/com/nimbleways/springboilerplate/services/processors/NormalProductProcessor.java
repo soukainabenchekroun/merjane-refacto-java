@@ -33,6 +33,7 @@ public class NormalProductProcessor implements ProductProcessor {
         }
 
         int leadTime = product.getLeadTime();
+
         if (leadTime > 0) {
             productService.notifyDelay(leadTime, product);
         }
