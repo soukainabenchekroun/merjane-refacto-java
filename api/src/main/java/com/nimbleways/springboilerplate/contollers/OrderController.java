@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/orders")
-public class MyController {
+public class OrderController {
 
     private final OrderProcessingService orderProcessingService;
 
-    public MyController(OrderProcessingService orderProcessingService) {
+    public OrderController(OrderProcessingService orderProcessingService) {
         this.orderProcessingService = orderProcessingService;
     }
 
