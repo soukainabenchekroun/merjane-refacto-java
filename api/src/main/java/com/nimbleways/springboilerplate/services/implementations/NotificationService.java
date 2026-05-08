@@ -1,4 +1,4 @@
-package com.nimbleways.springboilerplate.services;
+package com.nimbleways.springboilerplate.services.implementations;
 
 import java.time.LocalDate;
 

@@ -2,6 +2,8 @@ package com.nimbleways.springboilerplate.services;
 
 import com.nimbleways.springboilerplate.entities.Product;
 import com.nimbleways.springboilerplate.repositories.ProductRepository;
+import com.nimbleways.springboilerplate.services.implementations.NotificationService;
+import com.nimbleways.springboilerplate.services.implementations.ProductService;
 import com.nimbleways.springboilerplate.utils.Annotations.UnitTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

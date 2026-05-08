@@ -1,4 +1,4 @@
-package com.nimbleways.springboilerplate.services;
+package com.nimbleways.springboilerplate.services.implementations;
 
 import com.nimbleways.springboilerplate.entities.Product;
 import com.nimbleways.springboilerplate.repositories.ProductRepository;

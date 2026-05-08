@@ -3,15 +3,11 @@ package com.nimbleways.springboilerplate.services.processors;
 import com.nimbleways.springboilerplate.entities.Product;
 import com.nimbleways.springboilerplate.repositories.ProductRepository;
 import com.nimbleways.springboilerplate.services.ProductProcessor;
-import com.nimbleways.springboilerplate.services.ProductService;
+import com.nimbleways.springboilerplate.services.implementations.ProductService;
 import org.springframework.stereotype.Component;
 
 import static com.nimbleways.springboilerplate.domain.ProductTypes.NORMAL;
 
-/**
- * Processor for normal products. If the product is available, it decreases the available quantity by 1. If the product
- * is out of stock but has a lead time, it delegates to the ProductService to handle the delay notification logic.
- */
 @Component
 public class NormalProductProcessor implements ProductProcessor {
 
