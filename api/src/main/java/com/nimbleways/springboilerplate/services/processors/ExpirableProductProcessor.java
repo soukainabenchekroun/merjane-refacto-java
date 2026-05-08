@@ -9,6 +9,11 @@ import org.springframework.stereotype.Component;
 import java.time.Clock;
 import java.time.LocalDate;
 
+/**
+ * Processor for products that have an expiry date. If the product is still available and not expired, it decreases the
+ * available quantity by 1. If the product is expired or out of stock, it delegates to the ProductService to handle
+ * the expired product logic.
+ */
 @Component
 public class ExpirableProductProcessor implements ProductProcessor {
 
@@ -27,6 +32,7 @@ public class ExpirableProductProcessor implements ProductProcessor {
         this.productService = productService;
         this.clock = clock;
     }
+
 
     @Override
     public boolean supports(Product product) {

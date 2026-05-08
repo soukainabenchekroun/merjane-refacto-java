@@ -7,6 +7,11 @@ import org.springframework.stereotype.Service;
 import java.time.Clock;
 import java.time.LocalDate;
 
+/**
+ * Service responsible for handling product-related operations, such as notifying about delays, handling seasonal products,
+ * and managing expired products. It interacts with the ProductRepository to persist changes and uses the NotificationService
+ * to send relevant notifications based on the product's status and dates.
+ */
 @Service
 public class ProductService {
 

@@ -5,6 +5,9 @@ import com.nimbleways.springboilerplate.services.OrderProcessingService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controller for handling order-related endpoints.
+ */
 @RestController
 @RequestMapping("/orders")
 public class OrderController {

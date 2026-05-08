@@ -9,6 +9,11 @@ import org.springframework.stereotype.Component;
 import java.time.Clock;
 import java.time.LocalDate;
 
+/**
+ * Processor for seasonal products. If the product is currently in season and available, it decreases the available quantity
+ * by 1. If the product is out of season or out of stock, it delegates to the ProductService to handle the seasonal
+ * product logic.
+ */
 @Component
 public class SeasonalProductProcessor implements ProductProcessor {
 

@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * This service is responsible for processing orders. It retrieves the order from the repository,
+ * processes each product in the order using the appropriate processor, and returns a response.
+ */
 @Service
 public class OrderProcessingService {
 
