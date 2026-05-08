@@ -6,6 +6,7 @@ import com.nimbleways.springboilerplate.services.ProductProcessor;
 import com.nimbleways.springboilerplate.services.implementations.ProductService;
 import org.springframework.stereotype.Component;
 
+import java.time.Clock;
 import java.time.LocalDate;
 
 @Component
@@ -15,10 +16,16 @@ public class SeasonalProductProcessor implements ProductProcessor {
 
     private final ProductRepository productRepository;
     private final ProductService productService;
+    private final Clock clock;
 
-    public SeasonalProductProcessor(ProductRepository productRepository, ProductService productService) {
+    public SeasonalProductProcessor(
+            ProductRepository productRepository,
+            ProductService productService,
+            Clock clock
+    ) {
         this.productRepository = productRepository;
         this.productService = productService;
+        this.clock = clock;
     }
 
     @Override
@@ -28,8 +35,10 @@ public class SeasonalProductProcessor implements ProductProcessor {
 
     @Override
     public void process(Product product) {
-        if (LocalDate.now().isAfter(product.getSeasonStartDate())
-                && LocalDate.now().isBefore(product.getSeasonEndDate())
+        LocalDate today = LocalDate.now(clock);
+
+        if (today.isAfter(product.getSeasonStartDate())
+                && today.isBefore(product.getSeasonEndDate())
                 && product.getAvailable() > 0) {
             product.setAvailable(product.getAvailable() - 1);
             productRepository.save(product);

@@ -6,6 +6,7 @@ import com.nimbleways.springboilerplate.services.ProductProcessor;
 import com.nimbleways.springboilerplate.services.implementations.ProductService;
 import org.springframework.stereotype.Component;
 
+import java.time.Clock;
 import java.time.LocalDate;
 
 @Component
@@ -15,10 +16,16 @@ public class ExpirableProductProcessor implements ProductProcessor {
 
     private final ProductRepository productRepository;
     private final ProductService productService;
+    private final Clock clock;
 
-    public ExpirableProductProcessor(ProductRepository productRepository, ProductService productService) {
+    public ExpirableProductProcessor(
+            ProductRepository productRepository,
+            ProductService productService,
+            Clock clock
+    ) {
         this.productRepository = productRepository;
         this.productService = productService;
+        this.clock = clock;
     }
 
     @Override
@@ -28,7 +35,9 @@ public class ExpirableProductProcessor implements ProductProcessor {
 
     @Override
     public void process(Product product) {
-        if (product.getAvailable() > 0 && product.getExpiryDate().isAfter(LocalDate.now())) {
+        LocalDate today = LocalDate.now(clock);
+
+        if (product.getAvailable() > 0 && product.getExpiryDate().isAfter(today)) {
             product.setAvailable(product.getAvailable() - 1);
             productRepository.save(product);
             return;
