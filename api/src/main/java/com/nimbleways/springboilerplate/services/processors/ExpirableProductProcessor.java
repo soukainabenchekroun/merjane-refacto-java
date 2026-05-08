@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import java.time.Clock;
 import java.time.LocalDate;
 
+import static com.nimbleways.springboilerplate.domain.ProductTypes.EXPIRABLE;
+
 /**
  * Processor for products that have an expiry date. If the product is still available and not expired, it decreases the
  * available quantity by 1. If the product is expired or out of stock, it delegates to the ProductService to handle
@@ -17,7 +19,6 @@ import java.time.LocalDate;
 @Component
 public class ExpirableProductProcessor implements ProductProcessor {
 
-    private static final String EXPIRABLE = "EXPIRABLE";
 
     private final ProductRepository productRepository;
     private final ProductService productService;
